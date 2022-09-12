@@ -68,3 +68,18 @@ extension SKDResponseArray: CustomStringConvertible {
     return String(cString: ptr)
   }
 }
+
+
+fn main() {
+    lalrpop();
+}
+
+fn lalrpop() {
+    let source = "src/syntax/grammar.lalrpop";
+    println!("cargo:rerun-if-changed={}", source);
+    lalrpop::Configuration::new()
+        .use_cargo_dir_conventions()
+        .emit_report(true)
+        .process_file(source)
+        .unwrap();
+}
